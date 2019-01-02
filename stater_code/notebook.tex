@@ -1,0 +1,1218 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{WeatherPy}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Dependencies and Setup}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        
+        \PY{c+c1}{\PYZsh{} Import API key}
+        \PY{k+kn}{from} \PY{n+nn}{config} \PY{k}{import} \PY{p}{(}\PY{n}{api\PYZus{}key}\PY{p}{,} \PY{n}{gkey}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Incorporated citipy to determine city based on latitude and longitude}
+        \PY{k+kn}{from} \PY{n+nn}{citipy} \PY{k}{import} \PY{n}{citipy}
+        
+        \PY{c+c1}{\PYZsh{} Dependencies}
+        \PY{k+kn}{import} \PY{n+nn}{openweathermapy}\PY{n+nn}{.}\PY{n+nn}{core} \PY{k}{as} \PY{n+nn}{owm}
+        \PY{k+kn}{import} \PY{n+nn}{gmaps}
+        
+        \PY{c+c1}{\PYZsh{} Output File (CSV)}
+        \PY{n}{output\PYZus{}data\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{output\PYZus{}data/cities.csv}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{c+c1}{\PYZsh{} Range of latitudes and longitudes}
+        \PY{n}{lat\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{)}
+        \PY{n}{lng\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mi}{180}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Generate Cities List}\label{generate-cities-list}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} List for holding lat\PYZus{}lngs and cities}
+        \PY{n}{lat\PYZus{}lngs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{cities} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Create a set of random lat and lng combinations}
+        \PY{n}{lats} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{low}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{90.000}\PY{p}{,} \PY{n}{high}\PY{o}{=}\PY{l+m+mf}{90.000}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1500}\PY{p}{)}
+        \PY{n}{lngs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{low}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{180.000}\PY{p}{,} \PY{n}{high}\PY{o}{=}\PY{l+m+mf}{180.000}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1500}\PY{p}{)}
+        \PY{n}{lat\PYZus{}lngs} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{lats}\PY{p}{,} \PY{n}{lngs}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Identify nearest city for each lat, lng combination}
+        \PY{k}{for} \PY{n}{lat\PYZus{}lng} \PY{o+ow}{in} \PY{n}{lat\PYZus{}lngs}\PY{p}{:}
+            \PY{n}{city} \PY{o}{=} \PY{n}{citipy}\PY{o}{.}\PY{n}{nearest\PYZus{}city}\PY{p}{(}\PY{n}{lat\PYZus{}lng}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{lat\PYZus{}lng}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{city\PYZus{}name}
+            
+            \PY{c+c1}{\PYZsh{} If the city is unique, then add it to a our cities list}
+            \PY{k}{if} \PY{n}{city} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{cities}\PY{p}{:}
+                \PY{n}{cities}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{city}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print the city count to confirm sufficient count}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{cities}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 639
+\end{Verbatim}
+            
+    \subsection{Perform API Calls}\label{perform-api-calls}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Dictionary for holding city and weather info}
+        \PY{n}{weatherCity} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Create settings dictionary with information we\PYZsq{}re interested in OpenWeatherMap API Key}
+        \PY{n}{settings} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{units}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{imperial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{appid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{api\PYZus{}key}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Print header}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s+s2}{Beginning Data Retrieval}
+        \PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Get current weather per city}
+        \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{setCounter} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{cities}\PY{p}{:}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Processing Record }\PY{l+s+si}{\PYZob{}counter\PYZcb{}}\PY{l+s+s2}{ of Set }\PY{l+s+si}{\PYZob{}setCounter\PYZcb{}}\PY{l+s+s2}{ | }\PY{l+s+si}{\PYZob{}city\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{current\PYZus{}weather\PYZus{}city} \PY{o}{=} \PY{n}{owm}\PY{o}{.}\PY{n}{get\PYZus{}current}\PY{p}{(}\PY{n}{city}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{settings}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Add city and weather object into }
+                \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]} \PY{o}{=} \PY{n}{current\PYZus{}weather\PYZus{}city}
+                \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{if}\PY{p}{(}\PY{n}{counter} \PY{o}{==} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n}{setCounter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{except}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} ignore city and continue on}
+                \PY{k}{continue}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beginning Data Retrieval
+-----------------------------
+Processing Record 1 of Set 1 | salekhard
+Processing Record 2 of Set 1 | zhigansk
+Processing Record 3 of Set 1 | okato
+Processing Record 4 of Set 1 | zhuhai
+Processing Record 5 of Set 1 | chokurdakh
+Processing Record 6 of Set 1 | punta arenas
+Processing Record 7 of Set 1 | black river
+Processing Record 8 of Set 1 | sibolga
+Processing Record 9 of Set 1 | arroyo
+Processing Record 10 of Set 1 | hobart
+Processing Record 11 of Set 1 | pacific grove
+Processing Record 12 of Set 1 | halifax
+Processing Record 13 of Set 1 | barentsburg
+Processing Record 13 of Set 1 | fortuna
+Processing Record 14 of Set 1 | megion
+Processing Record 15 of Set 1 | port hedland
+Processing Record 16 of Set 1 | busselton
+Processing Record 17 of Set 1 | kapaa
+Processing Record 18 of Set 1 | saint-philippe
+Processing Record 19 of Set 1 | ushuaia
+Processing Record 20 of Set 1 | uray
+Processing Record 21 of Set 1 | butaritari
+Processing Record 22 of Set 1 | guapore
+Processing Record 22 of Set 1 | banda aceh
+Processing Record 23 of Set 1 | cape town
+Processing Record 24 of Set 1 | grand river south east
+Processing Record 24 of Set 1 | orlik
+Processing Record 25 of Set 1 | fuerte olimpo
+Processing Record 26 of Set 1 | souillac
+Processing Record 27 of Set 1 | kaitangata
+Processing Record 28 of Set 1 | alofi
+Processing Record 29 of Set 1 | albany
+Processing Record 30 of Set 1 | novobirilyussy
+Processing Record 31 of Set 1 | geraldton
+Processing Record 32 of Set 1 | carnarvon
+Processing Record 33 of Set 1 | hilo
+Processing Record 34 of Set 1 | port keats
+Processing Record 35 of Set 1 | illoqqortoormiut
+Processing Record 35 of Set 1 | barcelos
+Processing Record 36 of Set 1 | rikitea
+Processing Record 37 of Set 1 | veraval
+Processing Record 38 of Set 1 | kapoeta
+Processing Record 38 of Set 1 | mitrofanovka
+Processing Record 39 of Set 1 | puerto ayora
+Processing Record 40 of Set 1 | bonavista
+Processing Record 41 of Set 1 | pemberton
+Processing Record 42 of Set 1 | tasiilaq
+Processing Record 43 of Set 1 | kuah
+Processing Record 43 of Set 1 | vaini
+Processing Record 44 of Set 1 | faxinal
+Processing Record 45 of Set 1 | kuche
+Processing Record 45 of Set 1 | mataura
+Processing Record 46 of Set 1 | alice
+Processing Record 47 of Set 1 | tiksi
+Processing Record 48 of Set 1 | puerto escondido
+Processing Record 49 of Set 1 | murgab
+Processing Record 0 of Set 2 | atuona
+Processing Record 1 of Set 2 | kathu
+Processing Record 2 of Set 2 | arkhangelsk
+Processing Record 3 of Set 2 | luau
+Processing Record 4 of Set 2 | hithadhoo
+Processing Record 5 of Set 2 | campbell river
+Processing Record 6 of Set 2 | lasa
+Processing Record 7 of Set 2 | upernavik
+Processing Record 8 of Set 2 | bluff
+Processing Record 9 of Set 2 | barrow
+Processing Record 10 of Set 2 | victoria
+Processing Record 11 of Set 2 | olafsvik
+Processing Record 11 of Set 2 | yantal
+Processing Record 12 of Set 2 | jamestown
+Processing Record 13 of Set 2 | ribeira grande
+Processing Record 14 of Set 2 | yellowknife
+Processing Record 15 of Set 2 | maceio
+Processing Record 16 of Set 2 | arlit
+Processing Record 17 of Set 2 | baruun-urt
+Processing Record 18 of Set 2 | zanjan
+Processing Record 19 of Set 2 | bambous virieux
+Processing Record 20 of Set 2 | krivosheino
+Processing Record 21 of Set 2 | avarua
+Processing Record 22 of Set 2 | poum
+Processing Record 23 of Set 2 | vao
+Processing Record 24 of Set 2 | hermanus
+Processing Record 25 of Set 2 | safaga
+Processing Record 25 of Set 2 | pilao arcado
+Processing Record 25 of Set 2 | port lincoln
+Processing Record 26 of Set 2 | margate
+Processing Record 27 of Set 2 | bejar
+Processing Record 28 of Set 2 | waingapu
+Processing Record 29 of Set 2 | komsomolskiy
+Processing Record 30 of Set 2 | tuktoyaktuk
+Processing Record 31 of Set 2 | solnechnyy
+Processing Record 32 of Set 2 | muromtsevo
+Processing Record 33 of Set 2 | fountain hills
+Processing Record 34 of Set 2 | mallaig
+Processing Record 35 of Set 2 | nanortalik
+Processing Record 36 of Set 2 | provideniya
+Processing Record 37 of Set 2 | aubenas
+Processing Record 38 of Set 2 | dingli
+Processing Record 39 of Set 2 | vaxjo
+Processing Record 39 of Set 2 | kodiak
+Processing Record 40 of Set 2 | meulaboh
+Processing Record 41 of Set 2 | dongli
+Processing Record 42 of Set 2 | bredasdorp
+Processing Record 43 of Set 2 | yeppoon
+Processing Record 44 of Set 2 | ust-tsilma
+Processing Record 45 of Set 2 | dikson
+Processing Record 46 of Set 2 | nueva loja
+Processing Record 47 of Set 2 | trusesti
+Processing Record 48 of Set 2 | taoudenni
+Processing Record 49 of Set 2 | chuy
+Processing Record 0 of Set 3 | parana
+Processing Record 1 of Set 3 | alta floresta
+Processing Record 2 of Set 3 | kavaratti
+Processing Record 3 of Set 3 | xinzhi
+Processing Record 4 of Set 3 | klaksvik
+Processing Record 5 of Set 3 | caravelas
+Processing Record 6 of Set 3 | iqaluit
+Processing Record 7 of Set 3 | pyaozerskiy
+Processing Record 8 of Set 3 | taolanaro
+Processing Record 8 of Set 3 | constitucion
+Processing Record 9 of Set 3 | kegayli
+Processing Record 9 of Set 3 | demba
+Processing Record 10 of Set 3 | caledon east
+Processing Record 11 of Set 3 | codrington
+Processing Record 12 of Set 3 | cidreira
+Processing Record 13 of Set 3 | arman
+Processing Record 14 of Set 3 | mahebourg
+Processing Record 15 of Set 3 | port alfred
+Processing Record 16 of Set 3 | samusu
+Processing Record 16 of Set 3 | santiago
+Processing Record 17 of Set 3 | stonewall
+Processing Record 18 of Set 3 | hovd
+Processing Record 19 of Set 3 | karasjok
+Processing Record 20 of Set 3 | longyearbyen
+Processing Record 21 of Set 3 | cap-aux-meules
+Processing Record 22 of Set 3 | nchelenge
+Processing Record 23 of Set 3 | port elizabeth
+Processing Record 24 of Set 3 | rocha
+Processing Record 25 of Set 3 | vardo
+Processing Record 26 of Set 3 | severo-kurilsk
+Processing Record 27 of Set 3 | belushya guba
+Processing Record 27 of Set 3 | aklavik
+Processing Record 28 of Set 3 | libcice nad vltavou
+Processing Record 29 of Set 3 | vaitupu
+Processing Record 29 of Set 3 | tsihombe
+Processing Record 29 of Set 3 | namibe
+Processing Record 30 of Set 3 | outjo
+Processing Record 31 of Set 3 | saurimo
+Processing Record 32 of Set 3 | oranjestad
+Processing Record 33 of Set 3 | fort dodge
+Processing Record 34 of Set 3 | mujiayingzi
+Processing Record 35 of Set 3 | attawapiskat
+Processing Record 35 of Set 3 | bilaspur
+Processing Record 36 of Set 3 | pasni
+Processing Record 37 of Set 3 | herat
+Processing Record 38 of Set 3 | khatanga
+Processing Record 39 of Set 3 | gisborne
+Processing Record 40 of Set 3 | mangai
+Processing Record 41 of Set 3 | dubai
+Processing Record 42 of Set 3 | richards bay
+Processing Record 43 of Set 3 | thompson
+Processing Record 44 of Set 3 | east london
+Processing Record 45 of Set 3 | qaanaaq
+Processing Record 46 of Set 3 | mumford
+Processing Record 47 of Set 3 | pevek
+Processing Record 48 of Set 3 | laguna
+Processing Record 49 of Set 3 | clarksburg
+Processing Record 0 of Set 4 | paredon
+Processing Record 1 of Set 4 | dingle
+Processing Record 2 of Set 4 | hluti
+Processing Record 3 of Set 4 | general roca
+Processing Record 4 of Set 4 | mattru
+Processing Record 5 of Set 4 | vestmanna
+Processing Record 6 of Set 4 | kropotkin
+Processing Record 7 of Set 4 | fez
+Processing Record 8 of Set 4 | broken hill
+Processing Record 9 of Set 4 | leon
+Processing Record 10 of Set 4 | coquimbo
+Processing Record 11 of Set 4 | plouzane
+Processing Record 12 of Set 4 | saint george
+Processing Record 13 of Set 4 | ponta do sol
+Processing Record 14 of Set 4 | dalbandin
+Processing Record 15 of Set 4 | airai
+Processing Record 16 of Set 4 | cherskiy
+Processing Record 17 of Set 4 | akdepe
+Processing Record 18 of Set 4 | esperance
+Processing Record 19 of Set 4 | vila
+Processing Record 20 of Set 4 | mergui
+Processing Record 20 of Set 4 | tumannyy
+Processing Record 20 of Set 4 | kristiansund
+Processing Record 21 of Set 4 | lompoc
+Processing Record 22 of Set 4 | isoka
+Processing Record 23 of Set 4 | torbay
+Processing Record 24 of Set 4 | ler
+Processing Record 25 of Set 4 | yanji
+Processing Record 26 of Set 4 | tinskoy
+Processing Record 27 of Set 4 | isangel
+Processing Record 28 of Set 4 | urucui
+Processing Record 29 of Set 4 | jaisalmer
+Processing Record 30 of Set 4 | saleaula
+Processing Record 30 of Set 4 | broome
+Processing Record 31 of Set 4 | los llanos de aridane
+Processing Record 32 of Set 4 | nouadhibou
+Processing Record 33 of Set 4 | bethel
+Processing Record 34 of Set 4 | castro
+Processing Record 35 of Set 4 | manuel doblado
+Processing Record 35 of Set 4 | cockburn town
+Processing Record 36 of Set 4 | polis
+Processing Record 37 of Set 4 | arraial do cabo
+Processing Record 38 of Set 4 | west lafayette
+Processing Record 39 of Set 4 | grindavik
+Processing Record 40 of Set 4 | tual
+Processing Record 41 of Set 4 | verkhnyaya inta
+Processing Record 42 of Set 4 | ulladulla
+Processing Record 43 of Set 4 | sentyabrskiy
+Processing Record 43 of Set 4 | yarmouth
+Processing Record 44 of Set 4 | eirunepe
+Processing Record 45 of Set 4 | lorengau
+Processing Record 46 of Set 4 | bela
+Processing Record 47 of Set 4 | norman wells
+Processing Record 48 of Set 4 | dubrovnik
+Processing Record 49 of Set 4 | corinto
+Processing Record 0 of Set 5 | komyshany
+Processing Record 1 of Set 5 | bengkulu
+Processing Record 1 of Set 5 | usinsk
+Processing Record 2 of Set 5 | kankon
+Processing Record 3 of Set 5 | mikuni
+Processing Record 4 of Set 5 | maragogi
+Processing Record 5 of Set 5 | kazalinsk
+Processing Record 5 of Set 5 | mayo
+Processing Record 6 of Set 5 | amderma
+Processing Record 6 of Set 5 | colchester
+Processing Record 7 of Set 5 | tuatapere
+Processing Record 8 of Set 5 | vung tau
+Processing Record 9 of Set 5 | new norfolk
+Processing Record 10 of Set 5 | pischia
+Processing Record 11 of Set 5 | kapit
+Processing Record 12 of Set 5 | ust-kulom
+Processing Record 13 of Set 5 | riyadh
+Processing Record 14 of Set 5 | nhulunbuy
+Processing Record 15 of Set 5 | clyde river
+Processing Record 16 of Set 5 | niquelandia
+Processing Record 17 of Set 5 | lebu
+Processing Record 18 of Set 5 | businga
+Processing Record 19 of Set 5 | jablah
+Processing Record 20 of Set 5 | hazorasp
+Processing Record 21 of Set 5 | guerrero negro
+Processing Record 22 of Set 5 | lebedyn
+Processing Record 23 of Set 5 | georgetown
+Processing Record 24 of Set 5 | cayenne
+Processing Record 25 of Set 5 | hamilton
+Processing Record 26 of Set 5 | okakarara
+Processing Record 27 of Set 5 | huinan
+Processing Record 28 of Set 5 | tabuk
+Processing Record 29 of Set 5 | mukhen
+Processing Record 30 of Set 5 | san patricio
+Processing Record 31 of Set 5 | taywarah
+Processing Record 32 of Set 5 | fairbanks
+Processing Record 33 of Set 5 | pitimbu
+Processing Record 34 of Set 5 | nata
+Processing Record 35 of Set 5 | gouyave
+Processing Record 36 of Set 5 | christchurch
+Processing Record 37 of Set 5 | innisfail
+Processing Record 38 of Set 5 | anchorage
+Processing Record 39 of Set 5 | kutum
+Processing Record 40 of Set 5 | vila velha
+Processing Record 41 of Set 5 | mar del plata
+Processing Record 42 of Set 5 | el badari
+Processing Record 42 of Set 5 | saldanha
+Processing Record 43 of Set 5 | yamada
+Processing Record 44 of Set 5 | tocopilla
+Processing Record 45 of Set 5 | bac giang
+Processing Record 46 of Set 5 | santa maria da vitoria
+Processing Record 47 of Set 5 | batagay-alyta
+Processing Record 48 of Set 5 | litoral del san juan
+Processing Record 48 of Set 5 | ancud
+Processing Record 49 of Set 5 | takoradi
+Processing Record 0 of Set 6 | aykhal
+Processing Record 1 of Set 6 | camiri
+Processing Record 2 of Set 6 | nome
+Processing Record 3 of Set 6 | havre-saint-pierre
+Processing Record 4 of Set 6 | saskylakh
+Processing Record 5 of Set 6 | saint anthony
+Processing Record 6 of Set 6 | bria
+Processing Record 7 of Set 6 | tarko-sale
+Processing Record 8 of Set 6 | frankfort
+Processing Record 9 of Set 6 | marawi
+Processing Record 10 of Set 6 | uige
+Processing Record 11 of Set 6 | gat
+Processing Record 12 of Set 6 | sao luis do quitunde
+Processing Record 13 of Set 6 | hirado
+Processing Record 14 of Set 6 | milingimbi
+Processing Record 14 of Set 6 | umm lajj
+Processing Record 15 of Set 6 | redmond
+Processing Record 16 of Set 6 | rio gallegos
+Processing Record 17 of Set 6 | mentok
+Processing Record 17 of Set 6 | silver city
+Processing Record 18 of Set 6 | ilulissat
+Processing Record 19 of Set 6 | gravdal
+Processing Record 20 of Set 6 | alotau
+Processing Record 20 of Set 6 | egvekinot
+Processing Record 21 of Set 6 | narsaq
+Processing Record 22 of Set 6 | kongolo
+Processing Record 23 of Set 6 | aksarka
+Processing Record 24 of Set 6 | hasaki
+Processing Record 25 of Set 6 | lolua
+Processing Record 25 of Set 6 | bodden town
+Processing Record 26 of Set 6 | luoyang
+Processing Record 27 of Set 6 | mys shmidta
+Processing Record 27 of Set 6 | shubarkuduk
+Processing Record 28 of Set 6 | acarau
+Processing Record 28 of Set 6 | autun
+Processing Record 29 of Set 6 | vuktyl
+Processing Record 30 of Set 6 | mount gambier
+Processing Record 31 of Set 6 | te anau
+Processing Record 32 of Set 6 | uvira
+Processing Record 33 of Set 6 | evans
+Processing Record 34 of Set 6 | puerto carreno
+Processing Record 35 of Set 6 | labuhan
+Processing Record 36 of Set 6 | qandala
+Processing Record 37 of Set 6 | saint-georges
+Processing Record 38 of Set 6 | nikolskoye
+Processing Record 39 of Set 6 | kabo
+Processing Record 40 of Set 6 | husavik
+Processing Record 41 of Set 6 | kalmunai
+Processing Record 42 of Set 6 | praia
+Processing Record 43 of Set 6 | izhma
+Processing Record 44 of Set 6 | izumo
+Processing Record 45 of Set 6 | ayan
+Processing Record 46 of Set 6 | portoferraio
+Processing Record 47 of Set 6 | luderitz
+Processing Record 48 of Set 6 | kollumerland
+Processing Record 48 of Set 6 | flinders
+Processing Record 49 of Set 6 | yar-sale
+Processing Record 0 of Set 7 | langxiang
+Processing Record 1 of Set 7 | medina
+Processing Record 2 of Set 7 | roebourne
+Processing Record 3 of Set 7 | japura
+Processing Record 4 of Set 7 | ust-omchug
+Processing Record 5 of Set 7 | wattegama
+Processing Record 6 of Set 7 | paamiut
+Processing Record 7 of Set 7 | juneau
+Processing Record 8 of Set 7 | gombong
+Processing Record 9 of Set 7 | red wing
+Processing Record 10 of Set 7 | hofn
+Processing Record 11 of Set 7 | suda
+Processing Record 12 of Set 7 | port-gentil
+Processing Record 13 of Set 7 | palmer
+Processing Record 14 of Set 7 | pechenga
+Processing Record 15 of Set 7 | cukai
+Processing Record 16 of Set 7 | springbok
+Processing Record 17 of Set 7 | sikea
+Processing Record 17 of Set 7 | barcelona
+Processing Record 18 of Set 7 | aitape
+Processing Record 19 of Set 7 | thunder bay
+Processing Record 20 of Set 7 | salalah
+Processing Record 21 of Set 7 | ahipara
+Processing Record 22 of Set 7 | moron
+Processing Record 23 of Set 7 | south lake tahoe
+Processing Record 24 of Set 7 | saint-francois
+Processing Record 25 of Set 7 | kaberamaido
+Processing Record 26 of Set 7 | danville
+Processing Record 27 of Set 7 | marzuq
+Processing Record 28 of Set 7 | allanmyo
+Processing Record 28 of Set 7 | san quintin
+Processing Record 29 of Set 7 | tooele
+Processing Record 30 of Set 7 | san-pedro
+Processing Record 31 of Set 7 | dargaville
+Processing Record 32 of Set 7 | kushima
+Processing Record 33 of Set 7 | haines junction
+Processing Record 34 of Set 7 | nakhon phanom
+Processing Record 35 of Set 7 | paragominas
+Processing Record 36 of Set 7 | mfou
+Processing Record 37 of Set 7 | warburton
+Processing Record 38 of Set 7 | camopi
+Processing Record 39 of Set 7 | faanui
+Processing Record 40 of Set 7 | cabo san lucas
+Processing Record 41 of Set 7 | panaba
+Processing Record 42 of Set 7 | grand gaube
+Processing Record 43 of Set 7 | nuuk
+Processing Record 44 of Set 7 | touros
+Processing Record 45 of Set 7 | sri aman
+Processing Record 46 of Set 7 | samfya
+Processing Record 47 of Set 7 | high level
+Processing Record 48 of Set 7 | dostpur
+Processing Record 49 of Set 7 | natal
+Processing Record 0 of Set 8 | palabuhanratu
+Processing Record 0 of Set 8 | juifang
+Processing Record 0 of Set 8 | berlevag
+Processing Record 1 of Set 8 | saint marys
+Processing Record 2 of Set 8 | carutapera
+Processing Record 3 of Set 8 | jalu
+Processing Record 4 of Set 8 | rawah
+Processing Record 4 of Set 8 | maniitsoq
+Processing Record 5 of Set 8 | anloga
+Processing Record 6 of Set 8 | batticaloa
+Processing Record 7 of Set 8 | doha
+Processing Record 8 of Set 8 | vanimo
+Processing Record 9 of Set 8 | ondorhaan
+Processing Record 9 of Set 8 | that phanom
+Processing Record 10 of Set 8 | sitka
+Processing Record 11 of Set 8 | iquique
+Processing Record 12 of Set 8 | bezenchuk
+Processing Record 13 of Set 8 | cap malheureux
+Processing Record 14 of Set 8 | conde
+Processing Record 15 of Set 8 | diego de almagro
+Processing Record 16 of Set 8 | vaitape
+Processing Record 17 of Set 8 | wuwei
+Processing Record 18 of Set 8 | college
+Processing Record 19 of Set 8 | avera
+Processing Record 20 of Set 8 | takob
+Processing Record 20 of Set 8 | ayagoz
+Processing Record 21 of Set 8 | sarti
+Processing Record 22 of Set 8 | korla
+Processing Record 22 of Set 8 | palu
+Processing Record 23 of Set 8 | lae
+Processing Record 24 of Set 8 | kibala
+Processing Record 25 of Set 8 | oriximina
+Processing Record 26 of Set 8 | inuvik
+Processing Record 27 of Set 8 | tura
+Processing Record 28 of Set 8 | bambanglipuro
+Processing Record 29 of Set 8 | usak
+Processing Record 30 of Set 8 | kirakira
+Processing Record 31 of Set 8 | umea
+Processing Record 32 of Set 8 | cabras
+Processing Record 33 of Set 8 | altay
+Processing Record 34 of Set 8 | lubango
+Processing Record 35 of Set 8 | gushikawa
+Processing Record 36 of Set 8 | sabang
+Processing Record 37 of Set 8 | santa cruz
+Processing Record 38 of Set 8 | buritizeiro
+Processing Record 39 of Set 8 | opuwo
+Processing Record 40 of Set 8 | praya
+Processing Record 41 of Set 8 | umzimvubu
+Processing Record 41 of Set 8 | akdagmadeni
+Processing Record 42 of Set 8 | stillwater
+Processing Record 43 of Set 8 | faya
+Processing Record 44 of Set 8 | staryy nadym
+Processing Record 45 of Set 8 | lebanon
+Processing Record 46 of Set 8 | conceicao do araguaia
+Processing Record 47 of Set 8 | iskateley
+Processing Record 48 of Set 8 | borinskoye
+Processing Record 49 of Set 8 | mahuva
+Processing Record 0 of Set 9 | cortez
+Processing Record 1 of Set 9 | awbari
+Processing Record 2 of Set 9 | kahului
+Processing Record 3 of Set 9 | riohacha
+Processing Record 4 of Set 9 | saint-leu
+Processing Record 5 of Set 9 | severomorsk
+Processing Record 6 of Set 9 | nioro
+Processing Record 7 of Set 9 | bargal
+Processing Record 7 of Set 9 | madras
+Processing Record 8 of Set 9 | fort nelson
+Processing Record 9 of Set 9 | kruisfontein
+Processing Record 10 of Set 9 | axim
+Processing Record 11 of Set 9 | bathsheba
+Processing Record 12 of Set 9 | jujuy
+Processing Record 12 of Set 9 | lavrentiya
+Processing Record 13 of Set 9 | vila franca do campo
+Processing Record 14 of Set 9 | along
+Processing Record 15 of Set 9 | kudahuvadhoo
+Processing Record 16 of Set 9 | yirol
+Processing Record 16 of Set 9 | rajauri
+Processing Record 16 of Set 9 | roma
+Processing Record 17 of Set 9 | labutta
+Processing Record 17 of Set 9 | jackson
+Processing Record 18 of Set 9 | bournemouth
+Processing Record 19 of Set 9 | goure
+Processing Record 20 of Set 9 | houma
+Processing Record 21 of Set 9 | port blair
+Processing Record 22 of Set 9 | bud
+Processing Record 23 of Set 9 | horsham
+Processing Record 24 of Set 9 | blagoyevo
+Processing Record 25 of Set 9 | merrill
+Processing Record 26 of Set 9 | virginia beach
+Processing Record 27 of Set 9 | resistencia
+Processing Record 28 of Set 9 | kasongo-lunda
+Processing Record 29 of Set 9 | pisco
+Processing Record 30 of Set 9 | auki
+Processing Record 31 of Set 9 | cabatuan
+Processing Record 32 of Set 9 | shache
+Processing Record 33 of Set 9 | partizanskoye
+Processing Record 34 of Set 9 | florida
+Processing Record 35 of Set 9 | derzhavinsk
+Processing Record 36 of Set 9 | ugoofaaru
+Processing Record 37 of Set 9 | khakhea
+Processing Record 38 of Set 9 | qaqortoq
+Processing Record 39 of Set 9 | itarema
+Processing Record 40 of Set 9 | semey
+Processing Record 41 of Set 9 | comodoro rivadavia
+Processing Record 42 of Set 9 | saint-pierre
+Processing Record 43 of Set 9 | apac
+Processing Record 44 of Set 9 | urdzhar
+Processing Record 44 of Set 9 | merauke
+Processing Record 45 of Set 9 | amahai
+Processing Record 46 of Set 9 | tarpon springs
+Processing Record 47 of Set 9 | henties bay
+Processing Record 48 of Set 9 | mecca
+Processing Record 49 of Set 9 | anadyr
+Processing Record 0 of Set 10 | tamandare
+Processing Record 1 of Set 10 | dingtao
+Processing Record 2 of Set 10 | xining
+Processing Record 3 of Set 10 | bubaque
+Processing Record 4 of Set 10 | norden
+Processing Record 5 of Set 10 | yuzhno-yeniseyskiy
+Processing Record 5 of Set 10 | tubruq
+Processing Record 5 of Set 10 | marrakesh
+Processing Record 6 of Set 10 | slave lake
+Processing Record 7 of Set 10 | moose factory
+Processing Record 8 of Set 10 | polson
+Processing Record 9 of Set 10 | camachile
+Processing Record 10 of Set 10 | yurya
+Processing Record 10 of Set 10 | melilla
+Processing Record 11 of Set 10 | kamina
+Processing Record 12 of Set 10 | raga
+Processing Record 12 of Set 10 | gambela
+Processing Record 13 of Set 10 | petropavlovsk-kamchatskiy
+Processing Record 14 of Set 10 | casablanca
+Processing Record 15 of Set 10 | verkhnevilyuysk
+Processing Record 16 of Set 10 | kenitra
+Processing Record 17 of Set 10 | marcona
+Processing Record 17 of Set 10 | bundaberg
+Processing Record 18 of Set 10 | mweka
+Processing Record 19 of Set 10 | vostok
+Processing Record 20 of Set 10 | ostrovnoy
+Processing Record 21 of Set 10 | vanavara
+Processing Record 22 of Set 10 | khandyga
+Processing Record 23 of Set 10 | honiara
+Processing Record 24 of Set 10 | fukue
+Processing Record 25 of Set 10 | gumushane
+Processing Record 25 of Set 10 | bobo dioulasso
+Processing Record 25 of Set 10 | northam
+Processing Record 26 of Set 10 | tarauaca
+Processing Record 27 of Set 10 | zaysan
+Processing Record 28 of Set 10 | svetlyy
+Processing Record 28 of Set 10 | tilichiki
+Processing Record 29 of Set 10 | mogadishu
+Processing Record 30 of Set 10 | iquitos
+Processing Record 31 of Set 10 | sorrento
+Processing Record 32 of Set 10 | kaeo
+Processing Record 33 of Set 10 | beloha
+Processing Record 34 of Set 10 | klimovo
+Processing Record 35 of Set 10 | isabela
+Processing Record 36 of Set 10 | port hardy
+Processing Record 37 of Set 10 | calama
+Processing Record 38 of Set 10 | saint-augustin
+Processing Record 39 of Set 10 | kimbe
+Processing Record 40 of Set 10 | anahuac
+Processing Record 41 of Set 10 | belaya gora
+Processing Record 42 of Set 10 | haapu
+Processing Record 42 of Set 10 | alyangula
+Processing Record 43 of Set 10 | bur gabo
+Processing Record 43 of Set 10 | harper
+Processing Record 44 of Set 10 | ilongero
+Processing Record 45 of Set 10 | baoro
+Processing Record 46 of Set 10 | genc
+Processing Record 47 of Set 10 | bombay
+Processing Record 48 of Set 10 | sao filipe
+Processing Record 49 of Set 10 | denpasar
+Processing Record 0 of Set 11 | aden
+Processing Record 1 of Set 11 | khonuu
+Processing Record 1 of Set 11 | evansville
+Processing Record 2 of Set 11 | nantucket
+Processing Record 3 of Set 11 | malolos
+Processing Record 4 of Set 11 | martil
+Processing Record 5 of Set 11 | yermakovskoye
+Processing Record 6 of Set 11 | koumac
+Processing Record 7 of Set 11 | coihaique
+Processing Record 8 of Set 11 | lake city
+Processing Record 9 of Set 11 | oistins
+Processing Record 10 of Set 11 | yumen
+Processing Record 11 of Set 11 | formosa
+Processing Record 12 of Set 11 | tabiauea
+Processing Record 12 of Set 11 | partenit
+Processing Record 13 of Set 11 | sayyan
+Processing Record 14 of Set 11 | katsuura
+Processing Record 15 of Set 11 | louisbourg
+Processing Record 15 of Set 11 | wanlaweyn
+Processing Record 16 of Set 11 | chara
+Processing Record 17 of Set 11 | asosa
+Processing Record 18 of Set 11 | lagoa
+Processing Record 19 of Set 11 | rungata
+Processing Record 19 of Set 11 | bada
+Processing Record 20 of Set 11 | omsukchan
+Processing Record 21 of Set 11 | hit
+Processing Record 22 of Set 11 | andenes
+Processing Record 22 of Set 11 | ponta delgada
+Processing Record 23 of Set 11 | osypenko
+Processing Record 24 of Set 11 | guadalupe y calvo
+Processing Record 25 of Set 11 | byron bay
+Processing Record 26 of Set 11 | portobelo
+Processing Record 27 of Set 11 | sarila
+Processing Record 28 of Set 11 | tautira
+Processing Record 29 of Set 11 | porto novo
+Processing Record 30 of Set 11 | piacabucu
+Processing Record 31 of Set 11 | falealupo
+Processing Record 31 of Set 11 | portland
+Processing Record 32 of Set 11 | khowst
+Processing Record 32 of Set 11 | menongue
+Processing Record 33 of Set 11 | saint-joseph
+Processing Record 34 of Set 11 | bajil
+Processing Record 35 of Set 11 | inderborskiy
+Processing Record 35 of Set 11 | rozivka
+Processing Record 36 of Set 11 | kingaroy
+Processing Record 37 of Set 11 | nynashamn
+Processing Record 38 of Set 11 | san luis
+Processing Record 39 of Set 11 | santa vitoria do palmar
+Processing Record 40 of Set 11 | kichmengskiy gorodok
+Processing Record 41 of Set 11 | colares
+Processing Record 42 of Set 11 | tateyama
+Processing Record 43 of Set 11 | chicama
+Processing Record 44 of Set 11 | manaira
+Processing Record 45 of Set 11 | whitley bay
+Processing Record 46 of Set 11 | mafinga
+Processing Record 46 of Set 11 | yilan
+Processing Record 47 of Set 11 | taburi
+Processing Record 47 of Set 11 | dudinka
+Processing Record 48 of Set 11 | lewiston
+Processing Record 49 of Set 11 | viligili
+Processing Record 49 of Set 11 | sao jose da coroa grande
+Processing Record 0 of Set 12 | moosomin
+Processing Record 1 of Set 12 | westport
+Processing Record 2 of Set 12 | fare
+Processing Record 3 of Set 12 | sanchez
+Processing Record 4 of Set 12 | loding
+Processing Record 5 of Set 12 | pandan
+Processing Record 6 of Set 12 | jarjis
+Processing Record 6 of Set 12 | mahibadhoo
+Processing Record 7 of Set 12 | ukiah
+Processing Record 8 of Set 12 | tahe
+Processing Record 9 of Set 12 | saryshagan
+Processing Record 9 of Set 12 | ginir
+Processing Record 10 of Set 12 | hirara
+Processing Record 11 of Set 12 | letpadan
+Processing Record 12 of Set 12 | druskininkai
+Processing Record 13 of Set 12 | krasnomayskiy
+Processing Record 14 of Set 12 | santa maria
+Processing Record 15 of Set 12 | baculin
+Processing Record 16 of Set 12 | solone
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Create DataFrame to store: City, Cloudiness, Country, Date, Humidity, Lat, Lng, Max Temp, Wind Speed}
+        \PY{n}{weatherCity\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clouds.all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sys.country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+            \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{main.humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coord.lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+            \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coord.lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{main.temp\PYZus{}max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{weatherCity}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wind.speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]} 
+            \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{weatherCity}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Rename columns}
+        \PY{n}{weatherCity\PYZus{}df} \PY{o}{=} \PY{n}{weatherCity\PYZus{}df}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{1}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cloudiness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{2}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{3}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{4}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{5}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{6}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lng}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{7}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max Temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                        \PY{l+m+mi}{8}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Preview data}
+        \PY{n}{weatherCity\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}          City  Cloudiness Country        Date  Humidity    Lat     Lng  \textbackslash{}
+        0   Salekhard          80      RU  1546415546        72  66.54   66.62   
+        1    Zhigansk          68      RU  1546415546        68  66.77  123.37   
+        2       Okato          32      NZ  1546415546        99 -39.19  173.88   
+        3      Zhuhai          32      CN  1546412400        38  40.71  112.04   
+        4  Chokurdakh          48      RU  1546415319        81  70.62  147.90   
+        
+           Max Temp  Wind Speed  
+        0     10.64       11.77  
+        1    -15.10        7.58  
+        2     64.64       12.28  
+        3     24.80        2.24  
+        4      3.62       17.20  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Scatter Plot Temperature (F) vs. Latitude}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max Temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{150}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude vs. Max Temperature (}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{time.asctime(time.localtime(time.time()))\PYZcb{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Max Temperature (F)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Humidity (\PYZpc{}) vs. Latitude}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{120}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude vs. Humidity (}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{time.asctime(time.localtime(time.time()))\PYZcb{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humidity (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Cloudiness (\PYZpc{}) vs. Latitude}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cloudiness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{120}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude vs. Cloudiness (}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{time.asctime(time.localtime(time.time()))\PYZcb{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cloudiness (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Wind Speed (mph) vs. Latitude}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude vs. Wind Speed (}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{time.asctime(time.localtime(time.time()))\PYZcb{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wind Speed (mph)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Heat map of Max Temp.}
+        \PY{c+c1}{\PYZsh{} Configure gmaps with API key}
+        \PY{n}{gmaps}\PY{o}{.}\PY{n}{configure}\PY{p}{(}\PY{n}{api\PYZus{}key}\PY{o}{=}\PY{n}{gkey}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Store \PYZsq{}Lat\PYZsq{} and \PYZsq{}Lng\PYZsq{} into  locations }
+         \PY{n}{locations} \PY{o}{=} \PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lng}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Convert Max Temp. to float and store}
+         \PY{c+c1}{\PYZsh{} HINT: be sure to handle NaN values}
+         \PY{c+c1}{\PYZsh{} Shift temperatures by +50 to fix within heat range}
+         \PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max Temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max Temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{50}
+         \PY{n}{max\PYZus{}temp} \PY{o}{=} \PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max Temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Create a Max Temp. Heatmap layer}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{heat\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{heatmap\PYZus{}layer}\PY{p}{(}\PY{n}{locations}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{n}{max\PYZus{}temp}\PY{p}{,} 
+                                          \PY{n}{dissipating}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{max\PYZus{}intensity}\PY{o}{=}\PY{l+m+mi}{170}\PY{p}{,}
+                                          \PY{n}{point\PYZus{}radius} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Adjust heat\PYZus{}layer setting to help with heatmap dissipating on zoom}
+         \PY{n}{heat\PYZus{}layer}\PY{o}{.}\PY{n}{dissipating} \PY{o}{=} \PY{k+kc}{False}
+         \PY{n}{heat\PYZus{}layer}\PY{o}{.}\PY{n}{max\PYZus{}intensity} \PY{o}{=} \PY{l+m+mi}{170}
+         \PY{n}{heat\PYZus{}layer}\PY{o}{.}\PY{n}{point\PYZus{}radius} \PY{o}{=} \PY{l+m+mi}{2}
+         
+         \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{heat\PYZus{}layer}\PY{p}{)}
+         
+         \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='420px'))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Convert Humidity rate to list}
+         \PY{n}{humidity\PYZus{}rate} \PY{o}{=} \PY{n}{weatherCity\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humidity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Create Humity symbol layer}
+         \PY{n}{humidity\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{symbol\PYZus{}layer}\PY{p}{(}
+             \PY{n}{locations}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgba(0, 150, 0, 0.4)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{stroke\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgba(0, 0, 150, 0.4)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+             \PY{n}{info\PYZus{}box\PYZus{}content}\PY{o}{=}\PY{p}{[}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humity: }\PY{l+s+si}{\PYZob{}humidity\PYZcb{}}\PY{l+s+s2}{\PYZdq{}} \PY{k}{for} \PY{n}{humidity} \PY{o+ow}{in} \PY{n}{humidity\PYZus{}rate}\PY{p}{]}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{humidity\PYZus{}layer}\PY{p}{)}
+         
+         \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='420px'))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Create a combined map}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{heat\PYZus{}layer}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{humidity\PYZus{}layer}\PY{p}{)}
+         
+         \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='420px'))
+    \end{verbatim}
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
